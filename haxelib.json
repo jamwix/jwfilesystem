@@ -1,0 +1,11 @@
+{
+	"name": "jwfilesystem",
+	"url": "http://www.jamwix.com",
+	"license": "MIT",
+	"tags": [],
+	"description": "",
+	"version": "0.0.1",
+	"releasenote": "Update license",
+	"contributors": [ "wrbooth" ],
+	"dependencies": {}
+}
