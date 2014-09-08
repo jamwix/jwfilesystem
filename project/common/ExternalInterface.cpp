@@ -68,6 +68,15 @@ static value jwfilesystem_nobackup(value path)
 }
 DEFINE_PRIM (jwfilesystem_nobackup, 1);
 
+static value jwfilesystem_clientversion() 
+{
+	#ifdef IPHONE
+    return alloc_string(jwClientVersion());
+	#endif
+	return alloc_null();
+}
+DEFINE_PRIM (jwfilesystem_clientversion, 0);
+
 extern "C" void jwfilesystem_main() 
 {
 	val_int(0); // Fix Neko init

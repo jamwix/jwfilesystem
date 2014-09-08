@@ -78,6 +78,14 @@ class JWFileSystem {
 		filesystem_nobackup(path);
 #end
 	}
+
+	public static function clientVersion():String
+	{
+#if ios
+		return filesystem_clientversion();
+#end
+		return null;
+	}
 	
 	// Native Methods
 	
@@ -95,6 +103,8 @@ class JWFileSystem {
 		Lib.load ("jwfilesystem", "jwfilesystem_deletedirectory", 1);
 	private static var filesystem_nobackup = 
 		Lib.load ("jwfilesystem", "jwfilesystem_nobackup", 1);
+	private static var filesystem_clientversion = 
+		Lib.load ("jwfilesystem", "jwfilesystem_clientversion", 0);
 	#end
 	
 }

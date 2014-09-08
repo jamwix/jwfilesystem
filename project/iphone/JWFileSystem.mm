@@ -48,4 +48,11 @@ extern "C"
         u_int8_t attrValue = 1;
         int result = setxattr(sPath, attrName, &attrValue, sizeof(attrValue), 0, 0);
     }
+
+    const char* jwClientVersion()
+    {
+        NSString *version = 
+            [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+        return [version UTF8String];
+    }
 }

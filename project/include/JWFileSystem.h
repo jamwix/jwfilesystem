@@ -10,6 +10,7 @@ namespace jwfilesystem
         void jwCreateDirectory(const char *sPath);
         void jwDeleteFile(const char *sPath);
         void jwNoBackup(const char *sPath);
+        const char* jwClientVersion();
     }
 }
 
