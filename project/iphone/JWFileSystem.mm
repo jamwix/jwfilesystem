@@ -44,9 +44,31 @@ extern "C"
 
     void jwNoBackup(const char *sPath)
     {
-        const char* attrName = "com.apple.MobileBackup";
-        u_int8_t attrValue = 1;
-        int result = setxattr(sPath, attrName, &attrValue, sizeof(attrValue), 0, 0);
+//        const char* attrName = "com.apple.MobileBackup";
+//        u_int8_t attrValue = 1;
+//        int result = setxattr(sPath, attrName, &attrValue, sizeof(attrValue), 0, 0);
+
+        NSString *sUrl = [[NSString alloc] initWithUTF8String: sPath];
+        //NSString *fullUrl = [NSString stringWithFormat: @"%@%@", @"file://", sUrl];
+        NSURL *url = [NSURL fileURLWithPath: sUrl];
+
+        NSError *error = nil;
+        BOOL success = [url setResourceValue: [NSNumber numberWithBool: YES]
+                                      forKey: NSURLIsExcludedFromBackupKey 
+                                       error: &error];        
+
+        if (success) 
+        {
+            //NSLog(@"Successfully excluded %@ from backup", [url absoluteString]);
+        } 
+        else 
+        {
+            NSLog(@"Error excluding %@ from backup: %@", [url absoluteString], [error localizedDescription]);
+            id flag = nil;
+            [url getResourceValue: &flag
+                           forKey: NSURLIsExcludedFromBackupKey error: &error];
+            NSLog(@"NSURLIsExcludedFromBackupKey flag value is %@", flag);
+        }
     }
 
     const char* jwClientVersion()
