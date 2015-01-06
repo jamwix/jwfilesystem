@@ -87,6 +87,28 @@ class JWFileSystem {
 		return null;
 	}
 	
+	public static function setKey(key:String, value:String):Void
+	{
+#if ios
+		filesystem_set_key(key, value);
+#end
+	}
+
+	public static function getKey(key:String):String
+	{
+#if ios
+		return filesystem_get_key(key);
+#end
+		return null;
+	}
+
+	public static function syncStore():Void
+	{
+#if ios
+		return filesystem_sync_store();
+#end
+		return null;
+	}
 	// Native Methods
 	
 	
@@ -105,6 +127,12 @@ class JWFileSystem {
 		Lib.load ("jwfilesystem", "jwfilesystem_nobackup", 1);
 	private static var filesystem_clientversion = 
 		Lib.load ("jwfilesystem", "jwfilesystem_clientversion", 0);
+	private static var filesystem_set_key =
+		Lib.load("jwfilesystem", "jwfilesystem_set_key", 2);
+	private static var filesystem_get_key =
+		Lib.load("jwfilesystem", "jwfilesystem_get_key", 1);
+	private static var filesystem_sync_store =
+		Lib.load("jwfilesystem", "jwfilesystem_sync_store", 0);
 	#end
 	
 }

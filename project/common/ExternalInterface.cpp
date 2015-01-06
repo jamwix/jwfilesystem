@@ -77,6 +77,33 @@ static value jwfilesystem_clientversion()
 }
 DEFINE_PRIM (jwfilesystem_clientversion, 0);
 
+static value jwfilesystem_get_key(value key) 
+{
+	#ifdef IPHONE
+    return alloc_string(jwGetKey(val_string(key)));
+	#endif
+	return alloc_null();
+}
+DEFINE_PRIM (jwfilesystem_get_key, 1);
+
+static value jwfilesystem_set_key(value key, value val) 
+{
+	#ifdef IPHONE
+    jwSetKey(val_string(key), val_string(val));
+	#endif
+	return alloc_null();
+}
+DEFINE_PRIM (jwfilesystem_set_key, 2);
+
+static value jwfilesystem_sync_store() 
+{
+	#ifdef IPHONE
+    jwSyncStore();
+	#endif
+	return alloc_null();
+}
+DEFINE_PRIM (jwfilesystem_sync_store, 0);
+
 extern "C" void jwfilesystem_main() 
 {
 	val_int(0); // Fix Neko init

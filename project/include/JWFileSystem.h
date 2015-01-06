@@ -11,6 +11,9 @@ namespace jwfilesystem
         void jwDeleteFile(const char *sPath);
         void jwNoBackup(const char *sPath);
         const char* jwClientVersion();
+        void jwSetKey(const char * sName, const char * sValue);
+        void jwSyncStore();
+        const char* jwGetKey(const char * sName);
     }
 }
 

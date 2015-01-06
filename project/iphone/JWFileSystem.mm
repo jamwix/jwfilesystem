@@ -77,4 +77,22 @@ extern "C"
             [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
         return [version UTF8String];
     }
+
+    void jwSetKey(const char * sName, const char * sValue)
+    {
+        NSString *name = [[NSString alloc] initWithUTF8String: sName];
+        NSString *value = [[NSString alloc] initWithUTF8String: sValue];
+        [[NSUbiquitousKeyValueStore defaultStore] setString: value forKey: name];
+    }
+
+    void jwSyncStore()
+    {
+        [[NSUbiquitousKeyValueStore defaultStore] synchronize]; 
+    }
+
+    const char* jwGetKey(const char * sName)
+    {
+        NSString *name = [[NSString alloc] initWithUTF8String: sName];
+        return [[[NSUbiquitousKeyValueStore defaultStore] stringForKey: name] UTF8String];
+    }
 }
