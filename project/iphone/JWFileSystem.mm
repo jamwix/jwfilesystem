@@ -95,4 +95,11 @@ extern "C"
         NSString *name = [[NSString alloc] initWithUTF8String: sName];
         return [[[NSUbiquitousKeyValueStore defaultStore] stringForKey: name] UTF8String];
     }
+
+    const char* jwCurrencyCode()
+    {
+        NSLocale *theLocale = [NSLocale currentLocale];
+        NSString *code = [theLocale objectForKey:NSLocaleCurrencyCode];
+        return [code UTF8String];
+    }
 }

@@ -14,6 +14,7 @@ namespace jwfilesystem
         void jwSetKey(const char * sName, const char * sValue);
         void jwSyncStore();
         const char* jwGetKey(const char * sName);
+        const char* jwCurrencyCode();
     }
 }
 

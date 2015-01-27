@@ -104,6 +104,15 @@ static value jwfilesystem_sync_store()
 }
 DEFINE_PRIM (jwfilesystem_sync_store, 0);
 
+static value jwfilesystem_currency_code() 
+{
+	#ifdef IPHONE
+    return alloc_string(jwCurrencyCode());
+	#endif
+	return alloc_null();
+}
+DEFINE_PRIM (jwfilesystem_currency_code, 0);
+
 extern "C" void jwfilesystem_main() 
 {
 	val_int(0); // Fix Neko init

@@ -109,6 +109,14 @@ class JWFileSystem {
 #end
 		return null;
 	}
+
+	public static function currencyCode():String
+	{
+#if ios
+		return filesystem_currency_code();
+#end
+		return null;
+	}
 	// Native Methods
 	
 	
@@ -133,6 +141,8 @@ class JWFileSystem {
 		Lib.load("jwfilesystem", "jwfilesystem_get_key", 1);
 	private static var filesystem_sync_store =
 		Lib.load("jwfilesystem", "jwfilesystem_sync_store", 0);
+	private static var filesystem_currency_code =
+		Lib.load("jwfilesystem", "jwfilesystem_currency_code", 0);
 	#end
 	
 }
