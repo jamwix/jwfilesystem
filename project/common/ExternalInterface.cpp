@@ -97,10 +97,7 @@ DEFINE_PRIM (jwfilesystem_set_key, 2);
 
 static value jwfilesystem_sync_store() 
 {
-	#ifdef IPHONE
-    jwSyncStore();
-	#endif
-	return alloc_null();
+    return alloc_bool(jwSyncStore());
 }
 DEFINE_PRIM (jwfilesystem_sync_store, 0);
 
@@ -112,6 +109,15 @@ static value jwfilesystem_currency_code()
 	return alloc_null();
 }
 DEFINE_PRIM (jwfilesystem_currency_code, 0);
+
+static value jwfilesystem_physical_memory() 
+{
+	#ifdef IPHONE
+    return alloc_int(jwPhysicalMemory());
+	#endif
+	return alloc_null();
+}
+DEFINE_PRIM (jwfilesystem_physical_memory, 0);
 
 extern "C" void jwfilesystem_main() 
 {

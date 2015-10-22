@@ -12,9 +12,10 @@ namespace jwfilesystem
         void jwNoBackup(const char *sPath);
         const char* jwClientVersion();
         void jwSetKey(const char * sName, const char * sValue);
-        void jwSyncStore();
+        bool jwSyncStore();
         const char* jwGetKey(const char * sName);
         const char* jwCurrencyCode();
+        int jwPhysicalMemory();
     }
 }
 

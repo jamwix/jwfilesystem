@@ -102,7 +102,7 @@ class JWFileSystem {
 		return null;
 	}
 
-	public static function syncStore():Void
+	public static function syncStore():Bool
 	{
 #if ios
 		return filesystem_sync_store();
@@ -116,6 +116,14 @@ class JWFileSystem {
 		return filesystem_currency_code();
 #end
 		return null;
+	}
+
+	public static function physicalMemory():Int
+	{
+#if ios
+		return filesystem_physical_memory();
+#end
+		return -1;
 	}
 	// Native Methods
 	
@@ -143,6 +151,8 @@ class JWFileSystem {
 		Lib.load("jwfilesystem", "jwfilesystem_sync_store", 0);
 	private static var filesystem_currency_code =
 		Lib.load("jwfilesystem", "jwfilesystem_currency_code", 0);
+	private static var filesystem_physical_memory =
+		Lib.load("jwfilesystem", "jwfilesystem_physical_memory", 0);
 	#end
 	
 }

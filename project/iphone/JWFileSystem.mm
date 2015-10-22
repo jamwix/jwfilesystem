@@ -85,9 +85,9 @@ extern "C"
         [[NSUbiquitousKeyValueStore defaultStore] setString: value forKey: name];
     }
 
-    void jwSyncStore()
+    bool jwSyncStore()
     {
-        [[NSUbiquitousKeyValueStore defaultStore] synchronize]; 
+        return [[NSUbiquitousKeyValueStore defaultStore] synchronize]; 
     }
 
     const char* jwGetKey(const char * sName)
@@ -101,5 +101,13 @@ extern "C"
         NSLocale *theLocale = [NSLocale currentLocale];
         NSString *code = [theLocale objectForKey:NSLocaleCurrencyCode];
         return [code UTF8String];
+    }
+
+    int jwPhysicalMemory()
+    {
+        unsigned long long mem64 = 
+            [NSProcessInfo processInfo].physicalMemory;
+
+        return (int)(mem64 / 1024000);
     }
 }
