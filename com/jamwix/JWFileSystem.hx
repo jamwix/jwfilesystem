@@ -4,6 +4,10 @@ import openfl.Lib;
 import sys.FileSystem;
 import sys.FileStat;
 
+#if (android && openfl)
+import openfl.utils.JNI;
+#end
+
 class JWFileSystem {
 	
 
@@ -81,7 +85,7 @@ class JWFileSystem {
 
 	public static function clientVersion():String
 	{
-#if ios
+#if (ios || android)
 		return filesystem_clientversion();
 #end
 		return null;
@@ -107,7 +111,7 @@ class JWFileSystem {
 #if ios
 		return filesystem_sync_store();
 #end
-		return null;
+		return false;
 	}
 
 	public static function currencyCode():String
@@ -124,6 +128,14 @@ class JWFileSystem {
 		return filesystem_physical_memory();
 #end
 		return -1;
+	}
+
+	public static function isSonyDevice():Bool
+	{
+#if android
+		return filesystem_issonydevice();
+#end
+		return false;
 	}
 	// Native Methods
 	
@@ -154,6 +166,13 @@ class JWFileSystem {
 	private static var filesystem_physical_memory =
 		Lib.load("jwfilesystem", "jwfilesystem_physical_memory", 0);
 	#end
+
+#if android
+	private static var filesystem_clientversion = 
+		JNI.createStaticMethod("com.jamwix.JWFileSystem", "getVersion", "()Ljava/lang/String;");
+	private static var filesystem_issonydevice = 
+		JNI.createStaticMethod("com.jamwix.JWFileSystem", "isSonyDevice", "()Z");
+#end
 	
 }
 
