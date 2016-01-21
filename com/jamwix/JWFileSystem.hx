@@ -116,7 +116,7 @@ class JWFileSystem {
 
 	public static function currencyCode():String
 	{
-#if ios
+#if (ios || android)
 		return filesystem_currency_code();
 #end
 		return null;
@@ -172,6 +172,8 @@ class JWFileSystem {
 		JNI.createStaticMethod("com.jamwix.JWFileSystem", "getVersion", "()Ljava/lang/String;");
 	private static var filesystem_issonydevice = 
 		JNI.createStaticMethod("com.jamwix.JWFileSystem", "isSonyDevice", "()Z");
+	private static var filesystem_currency_code =
+		JNI.createStaticMethod("com.jamwix.JWFileSystem", "getCurrencyCode", "()Ljava/lang/String;");
 #end
 	
 }

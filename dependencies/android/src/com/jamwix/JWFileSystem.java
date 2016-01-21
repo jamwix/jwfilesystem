@@ -18,6 +18,8 @@ import org.json.JSONObject;
 import org.json.JSONException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Currency;
+import java.util.Locale;
 
 import org.haxe.extension.Extension;
 import org.haxe.lime.HaxeObject;
@@ -128,6 +130,21 @@ public class JWFileSystem extends Extension {
         return true;
     }
 
+    public static String getCurrencyCode() {
+        String currCode = "UNK";
+        Currency currency = Currency.getInstance(Locale.getDefault());
+        if (currency == null) {
+            return currCode;
+        }
+
+        currCode = currency.getCurrencyCode();
+        if (currCode == null) {
+            currCode = "UNK";
+            return currCode;
+        }
+
+        return currCode;
+    }
 
 
 	/**
